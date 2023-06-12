@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.nextit.free.dao.IFreeBoardDao">
+<mapper namespace="kr.or.nextit.free.mapper.IFreeBoardMapper">
 	
 <sql id="freeBoardSearch">
 	<if test="searchWord != null and searchWord !=''">
@@ -31,7 +31,7 @@
 	FROM DUAL
 </select>
 
-<insert id="insertBoard" parameterType="kr.or.nextit.free.vo.FreeBoardVO">
+<insert id="insertBoard" parameterType="FreeBoardVO">
 	INSERT INTO free_board (    
 		bo_no         				
 	   , bo_title    				
@@ -58,7 +58,7 @@
 </insert>
 
 
-<select id="getTotalRowCount" parameterType="kr.or.nextit.free.vo.FreeBoardSearchVO"
+<select id="getTotalRowCount" parameterType="FreeBoardSearchVO"
 	resultType="int">
 	select 
 		count(*) 		
@@ -68,8 +68,8 @@
 </select>
 
 
-<select id="getBaordList" parameterType="kr.or.nextit.free.vo.FreeBoardSearchVO"
-	resultType="kr.or.nextit.free.vo.FreeBoardVO">
+<select id="getBoardList" parameterType="FreeBoardSearchVO"
+	resultType="FreeBoardVO">
 
 	select																			
 	    d.*                                                                         
@@ -103,7 +103,7 @@
 </select>
 
 <select id="getBoard" parameterType="string"
-	resultType="kr.or.nextit.free.vo.FreeBoardVO">
+	resultType="FreeBoardVO">
 	select  				                            
 	 bo_no   				                            
 	,bo_title 			                            
@@ -132,7 +132,7 @@
 </update>
 
 
-<update id="updateBoard" parameterType="kr.or.nextit.free.vo.FreeBoardVO">
+<update id="updateBoard" parameterType="FreeBoardVO">
 	 UPDATE free_board SET              
 	      bo_title      = #{boTitle}             
 	    , bo_category   = #{boCategory}             
@@ -143,7 +143,7 @@
 </update>
 
 
-<update id="deleteBoard" parameterType="kr.or.nextit.free.vo.FreeBoardVO">
+<update id="deleteBoard" parameterType="FreeBoardVO">
 	UPDATE free_board SET         	
 		bo_del_yn = 'Y'             	
 		,bo_del_id = #{boWriter}                 
@@ -152,7 +152,7 @@
 </update>
 
 
-<select id="checkAdmin" parameterType="kr.or.nextit.free.vo.FreeBoardVO" 
+<select id="checkAdmin" parameterType="FreeBoardVO" 
 	resultType="int">
 	SELECT 
 		COUNT(*) 
